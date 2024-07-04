@@ -5,7 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 
 # Load the dataset
-iris_data = pd.read_csv('Iris.csv')
+iris_data = pd.read_csv('datasets\\Iris.csv')
 
 # Split features and target variable
 
