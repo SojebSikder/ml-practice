@@ -7,4 +7,3 @@ Pyarrow
 nltk
 seaborn
 tensorflow
-bangla-stemmer
