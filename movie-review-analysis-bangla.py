@@ -13,6 +13,7 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 
 
 dataset = pd.read_csv('datasets\\movie_reviews_dataset_bangla.csv')
+dataset = dataset.drop_duplicates()
 
 # Data cleaning
 nltk.download('stopwords')
@@ -43,14 +44,14 @@ y = dataset.iloc[:, 1].values
 
 # training
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.1, random_state=0
+    X, y, test_size=0.2, random_state=0
 )
 
-classifier = GaussianNB()
-classifier.fit(X_train, y_train)
+model = GaussianNB()
+model.fit(X_train, y_train)
 
 # Predicting the Test set results
-y_pred = classifier.predict(X_test)
+y_pred = model.predict(X_test)
 
 # Making the Confusion Matrix
 cm = confusion_matrix(y_test, y_pred)
@@ -60,7 +61,7 @@ accuracy = accuracy_score(y_test, y_pred)
 print(accuracy)
 
 # Predicting if a single review is positive or negative
-new_review = 'ভালো লাগছে'
+new_review = 'ভালো লাগলো না'
 new_review = re.sub('[^অ-ঔক-য়]', ' ', new_review)
 new_review = new_review.lower()
 new_review = new_review.split()
@@ -69,5 +70,5 @@ new_review = [ps.stem(word)
 new_review = ' '.join(new_review)
 new_corpus = [new_review]
 new_X_test = cv.transform(new_corpus).toarray()
-new_y_pred = classifier.predict(new_X_test)
+new_y_pred = model.predict(new_X_test)
 print(new_y_pred)
